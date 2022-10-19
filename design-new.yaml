@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flowable-design-ing
+  labels:
+    app: flowable-design-ing
+spec:
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+  selector:
+    app: flowable-design-ing
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flowable-design-ing
+spec:
+  selector:
+    matchLabels:
+      app: flowable-design-ing
+  template:
+    metadata:
+      labels:
+        app: flowable-design-ing
+    spec:
+      containers:
+      - env:
+        - name: flowable.common.app.idm-admin.user
+          value: admin
+        - name: flowable.common.app.idm-admin.password
+          value: test 
+        - name: flowable.common.app.idm-url
+          value: http://20.85.70.97:8080
+        - name: flowable.modeler.app.deployment-api-url
+          value: http://20.85.70.97:8080/app-api
+        - name: flowable.modeler.app.undeployment-api-url 
+          value: http://20.85.70.97:8080/platform-api/app-deployments
+        - name: server.servlet.context-path
+          value: /
+        - name: spring.datasource.driver-class-name
+          value: org.postgresql.Driver
+        - name: spring.datasource.url
+          value: jdbc:postgresql://engage-poc-dev-pg3.postgres.database.azure.com:5432/demoflowable
+        - name: spring.datasource.username 
+          value: postgres@engage-poc-dev-pg3
+        - name: spring.datasource.password
+          value: engage123!   
+        - name: flowable.modeler.app.multi-tenant-enabled
+          value: "true"
+        image: nraov/flowable_new:1.0
+        name: flowable-design-ing
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8080
+      #imagePullSecrets:
+       # - name: quickstart-flowable-regcred
+     
+
+     
+      
+   
+     
+     
+     
+     
+   
+
+

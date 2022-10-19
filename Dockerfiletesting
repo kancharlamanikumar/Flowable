@@ -1,0 +1,9 @@
+FROM artifacts.flowable.com/flowable/flowable-design:latest
+COPY ./favicon.png /app/WEB-INF/lib/flowable-ui-design-frontend-3.12.1.jar/static
+COPY favicon-16x16.png /app/WEB-INF/lib/flowable-ui-design-frontend-3.12.1.jar/static/images
+COPY favicon-32x32.png /app/WEB-INF/lib/flowable-ui-design-frontend-3.12.1.jar/static/images
+COPY flowable-logo.png /app/WEB-INF/lib/flowable-ui-design-frontend-3.12.1.jar/static/images
+COPY flowable-logo@2x.png /app/WEB-INF/lib/flowable-ui-design-frontend-3.12.1.jar/static/images
+COPY flowable-ui-design-frontend-3.12.2.jar /app/WEB-INF/lib
+#RUN chmod 644 /app/WEB-INF/lib/flowable-ui-design-frontend-3.12.2.jar
+#RUN cd /app/WEB-INF/lib && rm -rf flowable-ui-design-frontend-3.12.1.jar
